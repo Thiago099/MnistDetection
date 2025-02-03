@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style.css">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+
+
+    <div class="container">
+      <div id="training">
+        <h3>Traning...</h3>
+      </div>
+      <div class="row" id="trained">
+        <div class="panel">
+          <canvas id="canvas"></canvas>
+        </div>
+        <div class="panel">
+        <canvas id="chart"></canvas>
+
+
+        <label for="truth">Truth</label>
+        <input id="truth" type="text">
+        <label for="predicted">Predicted</label>
+        <input id="predicted" type="text">
+        <label for="treshold">Treshold (Higher values are more strict)</label>
+        <input type="range" id="treshold" min="0" max="1" step="0.01" value="0.9">
+        <button id="resetTreshold">Reset Treshold</button>
+        <button id="previus">Previus</button>
+        <button id="next">Next</button>
+
+        </div>
+
+      </div>
+
+  </div>
+    </body>
+</html>
