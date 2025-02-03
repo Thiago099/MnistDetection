@@ -21,6 +21,10 @@
           <canvas id="canvas"></canvas>
         </div>
         <div class="panel">
+
+          <label for="treshold">Treshold (Higher values are more strict)</label>
+          <input type="range" id="treshold" min="0" max="1" step="0.01" value="0.9">
+
         <canvas id="chart"></canvas>
 
 
@@ -28,8 +32,7 @@
         <input id="truth" type="text">
         <label for="predicted">Predicted</label>
         <input id="predicted" type="text">
-        <label for="treshold">Treshold (Higher values are more strict)</label>
-        <input type="range" id="treshold" min="0" max="1" step="0.01" value="0.9">
+
         <button id="resetTreshold">Reset Treshold</button>
         <button id="previus">Previus</button>
         <button id="next">Next</button>

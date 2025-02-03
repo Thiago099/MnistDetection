@@ -24,7 +24,6 @@ class BarChart {
         });
     }
     Update(data){
-        console.log(data)
         this.base.data.datasets[0].data = data;
         this.base.update();
     }
