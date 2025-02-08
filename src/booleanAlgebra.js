@@ -82,12 +82,18 @@ class AI {
         }
         return result
     }
-    Predict(x, targetScore = 0.5){
+    Predict(x, targetScore = 0.5, inferencePercentage = 100){
         const result = []
         for(const or of this.outputs){
             let current = 0
             let max = 0
-            for(const and of or){
+
+            let numSamples = Math.max(1, inferencePercentage / 100 * or.length)
+
+            for(let i = 0; i < numSamples; i++){
+
+                const and = or[i]
+
                 let score = 0
                 let maxScore = 0
                 for(const node of and){

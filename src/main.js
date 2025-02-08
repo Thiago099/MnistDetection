@@ -44,6 +44,9 @@ class Program{
     const predicted = document.getElementById("predicted")
     const previus = document.getElementById("previus")
     const next = document.getElementById("next")
+    const inferencePercentage = document.getElementById("inferencePercentage")
+    const resetInferencePercentage = document.getElementById("resetInferencePercentage")
+
     const chart = document.getElementById("chart")
 
     const barChart = new BarChart(chart)
@@ -57,7 +60,7 @@ class Program{
       let prediction = null
 
       while(prediction == null || Matrix.areZeros(prediction)){
-        prediction = encoder.Predict(xtest[index], treshold)
+        prediction = encoder.Predict(xtest[index], treshold, Number(inferencePercentage.value))
         treshold -= 0.01
       }
 
@@ -80,8 +83,18 @@ class Program{
       update()
     }
 
+    function doResetInferencePercentage(){
+      inferencePercentage.value = 10
+      update()
+    }
+
+    inferencePercentage.addEventListener("change", e=>{
+      update()
+    })
+
     next.addEventListener("click", goNext)
     previus.addEventListener("click", goPrevius)
+    resetInferencePercentage.addEventListener("click", doResetInferencePercentage)
 
     update()
   }
