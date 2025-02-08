@@ -49,7 +49,7 @@ function getKey(list){
 }
 class AI {
     outputs = []
-    constructor(tx, ty, negative = false) {
+    constructor(tx, ty, negative = true) {
         
         const x = Matrix.transpose(tx)
         const y = Matrix.transpose(ty)
