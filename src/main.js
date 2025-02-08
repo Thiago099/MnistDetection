@@ -27,13 +27,16 @@ function drawMNIST(canvasId, pixelData) {
 class Program{
   static async Main(){
 
+    const training = document.getElementById("training")
 
     const { xtrain, ytrain, xtest, ytest } = await GetMnistData()
+
+    training.innerHTML = "<h3>Training...</h3>"
+
     const encoder = new AI(xtrain, ytrain)
 
 
     const trained = document.getElementById("trained")
-    const training = document.getElementById("training")
 
     trained.style.display = "flex"
     training.style.display = "none"
