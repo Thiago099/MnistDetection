@@ -70,14 +70,10 @@ class AI {
             }
             this.outputs.push(Object.values(awnser))
         }
-        console.log(this.outputs.length)
-        console.log(this.outputs[0].length)
-        console.log(this.outputs[0][0].length)
     }
     PredictAll(x){
         const result = []
         for(const item of x){
-            console.log("x")
             result.push(this.Predict(item))
         }
         return result

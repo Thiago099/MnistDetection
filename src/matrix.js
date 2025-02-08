@@ -77,6 +77,15 @@ class Matrix{
         }
         return true
     }
+    static convertToBoolean(input){
+        const result = new Array(input.length)
+
+        for(let i = 0; i < input.length; i++){
+            result[i] = input[i] > 0.5 ? 1 : 0
+        }
+
+        return result
+    }
 }
 
 export { Matrix }

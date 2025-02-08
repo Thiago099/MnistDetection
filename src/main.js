@@ -31,9 +31,12 @@ class Program{
 
     const { xtrain, ytrain, xtest, ytest } = await GetMnistData()
 
+    const booleanXtrain = xtrain.map(Matrix.convertToBoolean)
+    const booleanXtest = xtest.map(Matrix.convertToBoolean)
+
     training.innerHTML = "<h3>Training...</h3>"
 
-    const encoder = new AI(xtrain, ytrain)
+    const encoder = new AI(booleanXtrain, ytrain)
 
 
     const trained = document.getElementById("trained")
@@ -63,7 +66,7 @@ class Program{
       let prediction = null
 
       while(prediction == null || Matrix.areZeros(prediction)){
-        prediction = encoder.Predict(xtest[index], treshold, Number(inferencePercentage.value))
+        prediction = encoder.Predict(booleanXtest[index], treshold, Number(inferencePercentage.value))
         treshold -= 0.01
       }
 

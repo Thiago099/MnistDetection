@@ -43,7 +43,7 @@ async function GetMnistData(){
         const { data } = await readFile(`mnist/${i}.json`)
 
         for(let j = 0; j < data.length; j+=28*28){
-            x.push(data.slice(j, j+28*28).map(x=>x>0.5?1:0))
+            x.push(data.slice(j, j+28*28))
             y.push(new Array(10).fill(0).map((_,x)=>x==i?1:0))
         }
     }
