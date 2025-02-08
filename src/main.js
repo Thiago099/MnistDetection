@@ -2,6 +2,7 @@ import { GetMnistData } from "./mnist";
 import { AI } from "./booleanAlgebra";
 import { Matrix } from "./matrix";
 import { BarChart } from "./chart";
+const print = console.log
 function drawMNIST(canvasId, pixelData) {
   const canvas = document.getElementById(canvasId);
   const ctx = canvas.getContext('2d');
@@ -43,18 +44,25 @@ class Program{
     const predicted = document.getElementById("predicted")
     const previus = document.getElementById("previus")
     const next = document.getElementById("next")
-    const treshold = document.getElementById("treshold")
     const chart = document.getElementById("chart")
-    const resetTreshold = document.getElementById("resetTreshold")
 
     const barChart = new BarChart(chart)
 
     let index = 0
 
     function update(){
-      const prediction = encoder.Predict(xtest[index], Number(treshold.value))
-      truth.value = Matrix.indexOfMax(ytest[index])
+
+      let treshold = 1;
+
+      let prediction = null
+
+      while(prediction == null || Matrix.areZeros(prediction)){
+        prediction = encoder.Predict(xtest[index], treshold)
+        treshold -= 0.01
+      }
+
       predicted.value =  Matrix.indexOfMax(prediction)
+      truth.value = Matrix.indexOfMax(ytest[index])
 
       barChart.Update(prediction)
       drawMNIST("canvas", xtest[index])
@@ -71,14 +79,10 @@ class Program{
       }
       update()
     }
-    function doResetTreshold(){
-      treshold.value = 0.9
-      update()
-    }
+
     next.addEventListener("click", goNext)
     previus.addEventListener("click", goPrevius)
-    treshold.addEventListener("change", update)
-    resetTreshold.addEventListener("click", doResetTreshold)
+
     update()
   }
 }

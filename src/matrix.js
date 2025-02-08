@@ -68,6 +68,15 @@ class Matrix{
         }
         return maxIndex;
     }
+
+    static areZeros(input){
+        for(const item of input){
+            if(item != 0){
+                return false
+            }
+        }
+        return true
+    }
 }
 
 export { Matrix }

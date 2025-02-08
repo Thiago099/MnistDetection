@@ -44,6 +44,9 @@ function normalize(arr) {
     }
     return arr.map(num => num / max);
 }
+function getKey(list){
+    return list.map(x=>x.index+"|"+x.not).join("-")
+}
 class AI {
     outputs = []
     constructor(tx, ty) {
@@ -62,12 +65,14 @@ class AI {
 
                 const XandY = Matrix.and(item, target)
                 const notXandY = Matrix.and(Matrix.not(item), target)
-
                 addToAnwser(awnser, XandY, new Node(i, false))
                 addToAnwser(awnser, notXandY, new Node(i, true))
             }
             this.outputs.push(Object.values(awnser))
         }
+        console.log(this.outputs.length)
+        console.log(this.outputs[0].length)
+        console.log(this.outputs[0][0].length)
     }
     PredictAll(x){
         const result = []
