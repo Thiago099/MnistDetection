@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script type="module" crossorigin src="/MnistDetection/assets/index-egWYKTIA.js"></script>
+    <link rel="stylesheet" crossorigin href="/MnistDetection/assets/index-D-F_UAe1.css">
+  </head>
+  <body>
+    <div id="app"></div>
+
+
+    <div class="container">
+      <div id="training">
+        <h3>Traning...</h3>
+      </div>
+      <div class="row" id="trained">
+        <div class="panel">
+          <canvas id="canvas"></canvas>
+        </div>
+        <div class="panel">
+
+          <label for="inferencePercentage">Inference Percentage (More is slower but more precise)</label>
+          <input type="range" id="inferencePercentage" min="0" max="100" step="1" value="10">
+          <button id="resetInferencePercentage">Reset Inference Percentage</button>
+
+        <canvas id="chart"></canvas>
+
+
+        <label for="truth">Truth</label>
+        <input id="truth" type="text">
+        <label for="predicted">Predicted</label>
+        <input id="predicted" type="text">
+
+        <button id="previus">Previus</button>
+        <button id="next">Next</button>
+
+        </div>
+
+      </div>
+
+  </div>
+    </body>
+</html>

@@ -1,0 +1,1 @@
+canvas{width:500px;height:500px;image-rendering:pixelated;image-rendering:crisp-edges}*{box-sizing:border-box}body{margin:0}.panel{display:flex;flex-direction:column;width:500px;margin-left:20px}.row{display:flex;flex-direction:row}.container{display:flex;justify-content:center;align-items:center;height:100vh}button,label{margin-top:5px}#trained{display:none}
