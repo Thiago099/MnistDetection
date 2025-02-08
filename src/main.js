@@ -90,7 +90,7 @@ class Program{
     }
 
     function doResetInferencePercentage(){
-      inferencePercentage.value = 10
+      inferencePercentage.value = 100
       update()
     }
 
