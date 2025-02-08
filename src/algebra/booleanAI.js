@@ -49,7 +49,7 @@ function getKey(list){
 }
 class AI {
     outputs = []
-    constructor(tx, ty) {
+    constructor(tx, ty, negative = false) {
         
         const x = Matrix.transpose(tx)
         const y = Matrix.transpose(ty)
@@ -64,9 +64,11 @@ class AI {
                 const item = x[i]
 
                 const XandY = Matrix.and(item, target)
-                const notXandY = Matrix.and(Matrix.not(item), target)
                 addToAnwser(awnser, XandY, new Node(i, false))
-                addToAnwser(awnser, notXandY, new Node(i, true))
+                if(negative){
+                    const notXandY = Matrix.and(Matrix.not(item), target)
+                    addToAnwser(awnser, notXandY, new Node(i, true))
+                }
             }
             this.outputs.push(Object.values(awnser))
         }
@@ -92,12 +94,15 @@ class AI {
 
                 let score = 0
                 let maxScore = 0
-                for(const node of and){
-                    maxScore++
-                    if(node.Evaluate(x)){
-                        score ++
+                if(and != null){
+                    for(const node of and){
+                        maxScore++
+                        if(node.Evaluate(x)){
+                            score ++
+                        }
                     }
                 }
+
 
                 max++
                 
@@ -111,6 +116,7 @@ class AI {
     }
     ToString(){
         let result = ""
+        let i = 0
         for(const or of this.outputs){
             const orResult = []
             for(const and of or){
@@ -121,8 +127,8 @@ class AI {
                 orResult.push(`(${andResult.join(" && ")})`)
             }
 
-            result+= orResult.join(" || ") + "\n"
-            
+            result+= `Output ${i+1}: \n ${orResult.join(" || ")} \n\n`
+            i++
         }
         return result
     }
