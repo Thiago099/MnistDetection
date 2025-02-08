@@ -1,8 +1,10 @@
-import { GetMnistData } from "./mnist";
-import { AI } from "./booleanAlgebra";
-import { Matrix } from "./matrix";
-import { BarChart } from "./chart";
+import { GetMnistData } from "./data/mnist";
+import { Matrix } from "./algebra/matrix";
+import { BarChart } from "./ui/chart";
+import { OneHotBooleanAi } from "./algebra/oneHotBooleanAI";
+
 const print = console.log
+
 function drawMNIST(canvasId, pixelData) {
   const canvas = document.getElementById(canvasId);
   const ctx = canvas.getContext('2d');
@@ -35,16 +37,13 @@ class Program{
     const booleanXtest = xtest.map(Matrix.convertToBoolean)
 
     training.innerHTML = "<h3>Training...</h3>"
-
-    const encoder = new AI(booleanXtrain, ytrain)
+    const ai = new OneHotBooleanAi(booleanXtrain, ytrain)
 
 
     const trained = document.getElementById("trained")
 
     trained.style.display = "flex"
     training.style.display = "none"
-
-
 
     const truth = document.getElementById("truth")
     const predicted = document.getElementById("predicted")
@@ -61,14 +60,7 @@ class Program{
 
     function update(){
 
-      let treshold = 1;
-
-      let prediction = null
-
-      while(prediction == null || Matrix.areZeros(prediction)){
-        prediction = encoder.Predict(booleanXtest[index], treshold, Number(inferencePercentage.value))
-        treshold -= 0.01
-      }
+      const prediction = ai.Predict(booleanXtest[index], Number(inferencePercentage.value))
 
       predicted.value =  Matrix.indexOfMax(prediction)
       truth.value = Matrix.indexOfMax(ytest[index])

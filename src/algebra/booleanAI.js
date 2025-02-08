@@ -78,7 +78,7 @@ class AI {
         }
         return result
     }
-    Predict(x, targetScore = 0.5, inferencePercentage = 100){
+    Predict(x, targetScore = 1, inferencePercentage = 100){
         const result = []
         for(const or of this.outputs){
             let current = 0
