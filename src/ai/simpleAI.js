@@ -6,10 +6,10 @@ function getDistance(a, b) {
     return Math.sqrt(squaredDistance)
 }
 
-class SimilarityItem {
-    constructor(index, score) {
+class SmallestDistance {
+    constructor(index, distance) {
         this.index = index
-        this.score = score
+        this.distance = distance
     }
 }
 
@@ -20,12 +20,12 @@ class SimpleAI {
     }
 
     Predict(x) {
-        let best = new SimilarityItem(this.x[0], Infinity)
+        let best = new SmallestDistance(null, Infinity)
 
         for(let i = 0; i < x.length; i++){
             const targetScore = getDistance(this.x[i], x)
-            if (targetScore < best.score) {
-                best = new SimilarityItem(i, targetScore)
+            if (targetScore < best.distance) {
+                best = new SmallestDistance(i, targetScore)
             }
         }
 
