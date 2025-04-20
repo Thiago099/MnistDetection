@@ -22,6 +22,9 @@ body{
   width: 500px;
   margin-left: 20px;
 }
+.panel-small{
+  width: 300px;
+}
 .row{
   display: flex;
   flex-direction: row;
