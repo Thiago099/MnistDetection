@@ -1,3 +1,3 @@
-![image](https://github.com/user-attachments/assets/2e515a0c-e27a-4396-bd64-ab3eef2dfc5e)
+![image](https://github.com/user-attachments/assets/7d4c3767-252c-435c-8f04-daad780652d3)
 
 https://thiago099.github.io/MnistDetection/
