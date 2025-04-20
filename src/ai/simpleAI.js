@@ -1,9 +1,9 @@
-function getDifference(a, b) {
+function getDistance(a, b) {
     let score = 0
     for (let i = 0; i < a.length; i++) {
-        score += Math.abs(a[i] - b[i])
+        score += (a[i] - b[i]) ** 2
     }
-    return score
+    return Math.sqrt(score)
 }
 
 class SimilarityItem {
@@ -23,7 +23,7 @@ class SimpleAI {
         let best = new SimilarityItem(this.x[0], Infinity)
 
         for(let i = 0; i < x.length; i++){
-            const targetScore = getDifference(this.x[i], x)
+            const targetScore = getDistance(this.x[i], x)
             if (targetScore < best.score) {
                 best = new SimilarityItem(i, targetScore)
             }
