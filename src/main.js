@@ -1,8 +1,7 @@
 import { GetMnistData } from "./data/mnist";
-import { Matrix } from "./algebra/matrix";
 import { BarChart } from "./ui/chart";
-import { OneHotBooleanAi } from "./algebra/oneHotBooleanAI";
-
+import { Matrix } from "./algebra/matrix"
+import { SimpleAI } from "./ai/simpleAI";
 const print = console.log
 
 function drawMNIST(canvasId, pixelData) {
@@ -37,7 +36,7 @@ class Program{
     const booleanXtest = xtest.map(Matrix.convertToBoolean)
 
     training.innerHTML = "<h3>Training...</h3>"
-    const ai = new OneHotBooleanAi(booleanXtrain, ytrain)
+    const ai = new SimpleAI(booleanXtrain, ytrain)
 
 
     const trained = document.getElementById("trained")
@@ -49,8 +48,6 @@ class Program{
     const predicted = document.getElementById("predicted")
     const previus = document.getElementById("previus")
     const next = document.getElementById("next")
-    const inferencePercentage = document.getElementById("inferencePercentage")
-    const resetInferencePercentage = document.getElementById("resetInferencePercentage")
 
     const chart = document.getElementById("chart")
 
@@ -60,7 +57,7 @@ class Program{
 
     function update(){
 
-      const prediction = ai.Predict(booleanXtest[index], Number(inferencePercentage.value))
+      const prediction = ai.Predict(booleanXtest[index])
 
       predicted.value =  Matrix.indexOfMax(prediction)
       truth.value = Matrix.indexOfMax(ytest[index])
@@ -81,18 +78,8 @@ class Program{
       update()
     }
 
-    function doResetInferencePercentage(){
-      inferencePercentage.value = 100
-      update()
-    }
-
-    inferencePercentage.addEventListener("change", e=>{
-      update()
-    })
-
     next.addEventListener("click", goNext)
     previus.addEventListener("click", goPrevius)
-    resetInferencePercentage.addEventListener("click", doResetInferencePercentage)
 
     update()
   }
