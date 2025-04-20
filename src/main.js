@@ -32,11 +32,9 @@ class Program{
 
     const { xtrain, ytrain, xtest, ytest } = await GetMnistData()
 
-    const booleanXtrain = xtrain.map(Matrix.convertToBoolean)
-    const booleanXtest = xtest.map(Matrix.convertToBoolean)
 
     training.innerHTML = "<h3>Training...</h3>"
-    const ai = new SimpleAI(booleanXtrain, ytrain)
+    const ai = new SimpleAI(xtrain, ytrain)
 
 
     const trained = document.getElementById("trained")
@@ -57,7 +55,7 @@ class Program{
 
     function update(){
 
-      const prediction = ai.Predict(booleanXtest[index])
+      const prediction = ai.Predict(xtest[index])
 
       predicted.value =  Matrix.indexOfMax(prediction)
       truth.value = Matrix.indexOfMax(ytest[index])

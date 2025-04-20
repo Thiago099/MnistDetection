@@ -1,9 +1,7 @@
-function similarity(a, b) {
+function getDifference(a, b) {
     let score = 0
     for (let i = 0; i < a.length; i++) {
-        if (a[i] == b[i]) {
-            score++
-        }
+        score += Math.abs(a[i] - b[i])
     }
     return score
 }
@@ -13,37 +11,24 @@ class SimilarityItem {
         this.item = item
         this.score = score
     }
-    get key() {
-        return this.item.join("-")
-    }
 }
 
 class SimpleAI {
     constructor(x, y) {
-        this.dict = {}
-        this.inputs = new Array(x.length)
-        for (let i = 0; i < x.length; i++) {
-            const key = x[i].join("-")
-            this.dict[key] = y[i]
-            this.inputs[i] = x[i]
-        }
+        this.x = x
+        this.y = y
     }
     Predict(x) {
-        const key = x.join("-")
+        let best = new SimilarityItem(this.x[0], Infinity)
 
-        if (key in this.dict) {
-            return this.dict[key]
-        }
-
-        let best = new SimilarityItem(this.inputs[0], -1)
-
-        for (const target of this.inputs) {
-            const targetScore = similarity(target, x)
-            if (targetScore > best.score) {
-                best = new SimilarityItem(target, targetScore)
+        for(let i = 0; i < x.length; i++){
+            const targetScore = getDifference(this.x[i], x)
+            if (targetScore < best.score) {
+                best = new SimilarityItem(this.y[i], targetScore)
             }
         }
-        return this.dict[best.key]
+
+        return best.item
     }
 }
 
