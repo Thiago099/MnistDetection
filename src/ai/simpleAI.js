@@ -1,9 +1,9 @@
 function getDistance(a, b) {
-    let score = 0
+    let squaredDistance = 0
     for (let i = 0; i < a.length; i++) {
-        score += (a[i] - b[i]) ** 2
+        squaredDistance += (a[i] - b[i]) ** 2
     }
-    return Math.sqrt(score)
+    return Math.sqrt(squaredDistance)
 }
 
 class SimilarityItem {
