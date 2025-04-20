@@ -7,8 +7,8 @@ function getDifference(a, b) {
 }
 
 class SimilarityItem {
-    constructor(item, score) {
-        this.item = item
+    constructor(index, score) {
+        this.index = index
         this.score = score
     }
 }
@@ -18,17 +18,18 @@ class SimpleAI {
         this.x = x
         this.y = y
     }
+
     Predict(x) {
         let best = new SimilarityItem(this.x[0], Infinity)
 
         for(let i = 0; i < x.length; i++){
             const targetScore = getDifference(this.x[i], x)
             if (targetScore < best.score) {
-                best = new SimilarityItem(this.y[i], targetScore)
+                best = new SimilarityItem(i, targetScore)
             }
         }
 
-        return best.item
+        return [this.x[best.index], this.y[best.index]]
     }
 }
 

@@ -2,31 +2,15 @@ import { GetMnistData } from "./data/mnist";
 import { BarChart } from "./ui/chart";
 import { Matrix } from "./algebra/matrix"
 import { SimpleAI } from "./ai/simpleAI";
+import { MnistCanvas, DrawingMnistCanvas } from "./ui/mnistCanvas";
 const print = console.log
-
-function drawMNIST(canvasId, pixelData) {
-  const canvas = document.getElementById(canvasId);
-  const ctx = canvas.getContext('2d');
-  const imageData = ctx.createImageData(28, 28);
-  canvas.width = 28
-  canvas.height = 28
-  
-  for (let i = 0; i < 784; i++) {
-      const value = pixelData[i];
-      const index = i * 4;
-      imageData.data[index] = value*255;
-      imageData.data[index + 1] = value*255;
-      imageData.data[index + 2] = value*255;
-      imageData.data[index + 3] = 255;
-  }
-  
-  ctx.putImageData(imageData, 0, 0);
-}
-
 
 
 class Program{
   static async Main(){
+
+    const canvas = new DrawingMnistCanvas("canvas")
+    const canvas2 = new MnistCanvas("canvas2")
 
     const training = document.getElementById("training")
 
@@ -46,6 +30,7 @@ class Program{
     const predicted = document.getElementById("predicted")
     const previus = document.getElementById("previus")
     const next = document.getElementById("next")
+    const clear = document.getElementById("clear")
 
     const chart = document.getElementById("chart")
 
@@ -53,16 +38,26 @@ class Program{
 
     let index = 0
 
-    function update(){
+    function update()
+    {
+      const [x,y] = ai.Predict(xtest[index])
 
-      const prediction = ai.Predict(xtest[index])
-
-      predicted.value =  Matrix.indexOfMax(prediction)
+      predicted.value =  Matrix.indexOfMax(y)
       truth.value = Matrix.indexOfMax(ytest[index])
-
-      barChart.Update(prediction)
-      drawMNIST("canvas", xtest[index])
+      barChart.Update(y)
+      canvas.data = xtest[index]
+      canvas2.data = x
     }
+
+    canvas.onDrawEnd = predictDrawing
+
+    function predictDrawing() {
+      const [x,y] = ai.Predict(canvas.data)
+      predicted.value =  Matrix.indexOfMax(y)
+      barChart.Update(y)
+      canvas2.data = x
+    }
+
     function  goNext(){
       if(index < xtest.length){
         index++
@@ -78,7 +73,7 @@ class Program{
 
     next.addEventListener("click", goNext)
     previus.addEventListener("click", goPrevius)
-
+    clear.addEventListener("click", e=>canvas.clear())
     update()
   }
 }
