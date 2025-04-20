@@ -18,25 +18,55 @@ class SimilarityItem {
     }
 }
 
+let i = 0
+class Pair {
+    id = i++
+    false = null
+    true = null
+    value = null
+    SetResult(value){
+        this.value = value
+    }
+    Process(value) {
+        if(value == 1){
+            this.true = new Pair()
+            return this.true
+        } 
+        else{
+            this.false = new Pair()
+            return this.false
+        }
+    }
+    Get(value){
+        if(value == 1){
+            return this.true
+        }
+        else{
+            return this.false
+        }
+    }
+}
+
 class SimpleAI {
     constructor(x, y) {
         this.dict = {}
-        this.sim = new Array(2)
+        this.sim = new Pair()
         this.inputs = new Array(x.length)
+
         for (let i = 0; i < x.length; i++) {
             const key = x[i].join("-")
             this.dict[key] = y[i]
             this.inputs[i] = x[i]
 
             let it = this.sim
+            
             for(let j = 0; j < x[i].length; j++){
-                if(!(x[i][j] in it)){
-                    it[x[i][j]] = new Array(2)
-                }
-                it = it[x[i][j]]
+                it = it.Process(x[i][j])
             }
+
+
+            it.SetResult(y[i])
         }
-        console.log(JSON.stringify(this.sim))
     }
     Predict(x) {
         const key = x.join("-")
@@ -45,18 +75,13 @@ class SimpleAI {
             return this.dict[key]
         }
 
-        let best = new SimilarityItem(this.inputs[0], -1)
+        let it = this.sim
 
-        for (const target of this.inputs) 
-        {
-            const targetScore = similarity(target, x)
-
-            if (targetScore > best.score) {
-                best = new SimilarityItem(target, targetScore)
-            }
+        for(let i = 0; i < x.length; i++){
+            it = it.Get(x[i])
         }
 
-        return this.dict[best.key]
+        return it.value
     }
 }
 
