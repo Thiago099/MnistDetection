@@ -73,7 +73,10 @@ class Program{
 
     next.addEventListener("click", goNext)
     previus.addEventListener("click", goPrevius)
-    clear.addEventListener("click", e=>canvas.clear())
+    clear.addEventListener("click", e=>{
+      canvas.clear()
+      predictDrawing()
+    })
     update()
   }
 }
