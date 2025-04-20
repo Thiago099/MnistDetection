@@ -38,6 +38,12 @@ class Program{
     training.innerHTML = "<h3>Training...</h3>"
     const ai = new SimpleAI(booleanXtrain, ytrain)
 
+    training.innerHTML = "<h3>Evaluating...</h3>"
+
+    // for(const item of booleanXtest){
+    //   ai.Predict(item)
+    // }
+
 
     const trained = document.getElementById("trained")
 

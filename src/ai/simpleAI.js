@@ -21,12 +21,22 @@ class SimilarityItem {
 class SimpleAI {
     constructor(x, y) {
         this.dict = {}
+        this.sim = new Array(2)
         this.inputs = new Array(x.length)
         for (let i = 0; i < x.length; i++) {
             const key = x[i].join("-")
             this.dict[key] = y[i]
             this.inputs[i] = x[i]
+
+            let it = this.sim
+            for(let j = 0; j < x[i].length; j++){
+                if(!(x[i][j] in it)){
+                    it[x[i][j]] = new Array(2)
+                }
+                it = it[x[i][j]]
+            }
         }
+        console.log(JSON.stringify(this.sim))
     }
     Predict(x) {
         const key = x.join("-")
@@ -37,12 +47,15 @@ class SimpleAI {
 
         let best = new SimilarityItem(this.inputs[0], -1)
 
-        for (const target of this.inputs) {
+        for (const target of this.inputs) 
+        {
             const targetScore = similarity(target, x)
+
             if (targetScore > best.score) {
                 best = new SimilarityItem(target, targetScore)
             }
         }
+
         return this.dict[best.key]
     }
 }
