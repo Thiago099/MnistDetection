@@ -23,9 +23,9 @@ class SimpleAI {
         let best = new SmallestDistance(null, Infinity)
 
         for(let i = 0; i < x.length; i++){
-            const targetScore = getDistance(this.x[i], x)
-            if (targetScore < best.distance) {
-                best = new SmallestDistance(i, targetScore)
+            const currentDistance = getDistance(this.x[i], x)
+            if (currentDistance < best.distance) {
+                best = new SmallestDistance(i, currentDistance)
             }
         }
 
